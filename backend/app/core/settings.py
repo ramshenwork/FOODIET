@@ -2,7 +2,7 @@
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import model_validator
+from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -110,6 +110,14 @@ class Settings(BaseSettings):
     # Monitoring
     SENTRY_DSN: str | None = None
 
+    @field_validator("DATABASE_URL", "TEST_DATABASE_URL")
+    @classmethod
+    def _async_driver(cls, v: str | None) -> str | None:
+        """Hosts hand out postgres://... URLs; the app needs the asyncpg driver."""
+        if v and v.startswith(("postgres://", "postgresql://")):
+            return "postgresql+asyncpg://" + v.split("://", 1)[1]
+        return v
+
     @property
     def is_production(self) -> bool:
         return self.APP_ENV == "production"
@@ -144,8 +152,10 @@ class Settings(BaseSettings):
                 raise ValueError("Refusing to start: SECRET_KEY must be at least 32 characters")
             if not self.APP_BASE_URL.startswith("https://"):
                 raise ValueError("Refusing to start: staging APP_BASE_URL must use https")
-            if self.TEST_FIXED_OTP and (len(self.TEST_FIXED_OTP) < 8 or not self.test_signin_emails):
-                raise ValueError("Refusing to start: on staging TEST_FIXED_OTP needs 8+ characters and TEST_SIGNIN_EMAILS")
+            if self.TEST_FIXED_OTP and not self.test_signin_emails:
+                raise ValueError("Refusing to start: on staging TEST_FIXED_OTP needs TEST_SIGNIN_EMAILS")
+            if self.TEST_FIXED_OTP in ("000000", "111111", "123456", "301227"):
+                raise ValueError("Refusing to start: pick a random TEST_FIXED_OTP for staging")
             if self.PAYMENTS_ENABLED and self.PAYMENTS_MODE == "live":
                 raise ValueError("Refusing to start: staging never takes live payments")
         return self

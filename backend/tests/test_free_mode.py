@@ -55,17 +55,17 @@ def test_production_without_payments_needs_no_prices_or_razorpay():
 
 
 def test_staging_fixed_code_rules():
-    with pytest.raises(ValueError):  # short code
+    with pytest.raises(ValueError):  # guessable code
         Settings(APP_ENV="staging", TEST_FIXED_OTP="123456", TEST_SIGNIN_EMAILS="a@b.com", **BASE)
     with pytest.raises(ValueError):  # no allowlist
-        Settings(APP_ENV="staging", TEST_FIXED_OTP="long-test-code-1", **BASE)
+        Settings(APP_ENV="staging", TEST_FIXED_OTP="583921", **BASE)
     with pytest.raises(ValueError):  # http
         Settings(APP_ENV="staging", **{**BASE, "APP_BASE_URL": "http://x.example.com"})
-    Settings(APP_ENV="staging", TEST_FIXED_OTP="long-test-code-1", TEST_SIGNIN_EMAILS="a@b.com", **BASE)
+    Settings(APP_ENV="staging", TEST_FIXED_OTP="583921", TEST_SIGNIN_EMAILS="a@b.com", **BASE)
 
 
 def test_staging_fixed_code_only_for_listed_emails(monkeypatch):
-    s = Settings(APP_ENV="staging", TEST_FIXED_OTP="long-test-code-1", TEST_SIGNIN_EMAILS="Tester@B.com", **BASE)
+    s = Settings(APP_ENV="staging", TEST_FIXED_OTP="583921", TEST_SIGNIN_EMAILS="Tester@B.com", **BASE)
     monkeypatch.setattr(security, "get_settings", lambda: s)
-    assert security.new_otp("tester@b.com") == "long-test-code-1"
-    assert security.new_otp("someone@else.com") != "long-test-code-1"
+    assert security.new_otp("tester@b.com") == "583921"
+    assert security.new_otp("someone@else.com") != "583921"

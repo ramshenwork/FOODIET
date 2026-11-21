@@ -1,0 +1,9 @@
+.env
+.git
+.venv
+.claude
+**/node_modules
+frontend/dist
+backend/var
+**/__pycache__
+design-notes

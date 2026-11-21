@@ -1,6 +1,6 @@
 """DEVELOPMENT ONLY: mark placeholder nutrient profiles as cleared so publishing can be tried locally.
 
-Refuses to run unless APP_ENV=development. Real data must be licensed and cleared by an admin (phase 4).
+Refuses to run unless APP_ENV is development or staging (the test server). Real data must be licensed and cleared by an admin (phase 4).
 Run from backend/:  ../.venv/bin/python -m jobs.dev_clear_placeholders
 """
 import asyncio
@@ -13,8 +13,8 @@ from app.models.ingredients import NutrientProfile
 
 
 async def clear(session) -> int:
-    if get_settings().APP_ENV != "development":
-        raise SystemExit("Refusing: this command only runs with APP_ENV=development.")
+    if get_settings().APP_ENV not in ("development", "staging"):
+        raise SystemExit("Refusing: this command only runs with APP_ENV=development or staging.")
     res = await session.execute(update(NutrientProfile).where(NutrientProfile.source == "placeholder")
                                 .values(licence_status="cleared", source_version="placeholder-DEV-CLEARED"))
     return res.rowcount

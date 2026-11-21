@@ -1,6 +1,6 @@
 """DEVELOPMENT ONLY: three demo restaurants in Hyderabad with published dishes, for trying discovery locally.
 
-Refuses to run unless APP_ENV=development. Recipes are copies of the placeholder reference recipes.
+Refuses to run unless APP_ENV is development or staging (the test server). Recipes are copies of the placeholder reference recipes.
 Run from backend/:  ../.venv/bin/python -m jobs.dev_seed_demo
 """
 import asyncio
@@ -46,8 +46,8 @@ DEMO = [
 
 
 async def main() -> None:
-    if get_settings().APP_ENV != "development":
-        raise SystemExit("Refusing: this command only runs with APP_ENV=development.")
+    if get_settings().APP_ENV not in ("development", "staging"):
+        raise SystemExit("Refusing: this command only runs with APP_ENV=development or staging.")
     async with database.sessionmaker()() as s:
         refs = {r.name: r for r in (await s.scalars(select(ReferenceRecipe))).all()}
         dishes = {d.id: d for d in (await s.scalars(select(CanonicalDish))).all()}
