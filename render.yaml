@@ -1,0 +1,35 @@
+# Render blueprint. Region is an open owner decision: set it to match the Supabase project.
+# Environment variables are entered in the Render dashboard, never committed.
+services:
+  - type: web
+    name: foodiet-web
+    runtime: python
+    plan: starter
+    buildCommand: >-
+      pip install -r backend/requirements.txt &&
+      cd frontend && npm ci && npm run build
+    preDeployCommand: cd backend && alembic upgrade head
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers --forwarded-allow-ips='*'
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.15"
+  - type: cron
+    name: foodiet-nightly
+    runtime: python
+    schedule: "30 21 * * *"   # 03:00 IST
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && python -m jobs.nightly
+  - type: cron
+    name: foodiet-reminders
+    runtime: python
+    schedule: "30 3 * * *"    # 09:00 IST
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && python -m jobs.reminders
+  - type: cron
+    name: foodiet-reconcile
+    runtime: python
+    schedule: "0 22 * * *"    # 03:30 IST
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && python -m jobs.reconcile
+# Verification expiry needs no job: labels and spreads are computed from stored dates on every request.

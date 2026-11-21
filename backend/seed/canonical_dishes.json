@@ -1,0 +1,20 @@
+[
+  {"name": "Paneer Butter Masala", "cuisine": "North Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [150, 260], "aliases": [["Paneer Makhani", "en"], ["पनीर बटर मसाला", "hi"], ["Butter Paneer", "en"]]},
+  {"name": "Butter Chicken", "cuisine": "North Indian", "region": null, "diet_class": "non_veg", "expected_kcal_100g": [140, 250], "aliases": [["Murgh Makhani", "en"], ["बटर चिकन", "hi"]]},
+  {"name": "Chicken Biryani", "cuisine": "Biryani", "region": null, "diet_class": "non_veg", "expected_kcal_100g": [150, 260], "aliases": [["Murgh Biryani", "en"], ["चिकन बिरयानी", "hi"]], "variants": [["hyderabad", "Hyderabadi Chicken Dum Biryani"], ["kolkata", "Kolkata Chicken Biryani"]]},
+  {"name": "Masala Dosa", "cuisine": "South Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [130, 230], "aliases": [["मसाला डोसा", "hi"], ["மசாலா தோசை", "ta"]]},
+  {"name": "Plain Dosa", "cuisine": "South Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [140, 240], "aliases": [["Sada Dosa", "en"], ["தோசை", "ta"]]},
+  {"name": "Idli", "cuisine": "South Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [110, 170], "aliases": [["இட்லி", "ta"], ["इडली", "hi"]]},
+  {"name": "Sambar", "cuisine": "South Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [40, 110], "aliases": [["Sambhar", "en"], ["சாம்பார்", "ta"]]},
+  {"name": "Dal Tadka", "cuisine": "North Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [80, 160], "aliases": [["Dal Fry", "en"], ["दाल तड़का", "hi"]]},
+  {"name": "Chana Masala", "cuisine": "North Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [110, 200], "aliases": [["Chole", "en"], ["छोले", "hi"]]},
+  {"name": "Palak Paneer", "cuisine": "North Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [100, 200], "aliases": [["पालक पनीर", "hi"]]},
+  {"name": "Aloo Gobi", "cuisine": "North Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [70, 150], "aliases": [["आलू गोभी", "hi"]]},
+  {"name": "Chicken Tikka", "cuisine": "Tandoor", "region": null, "diet_class": "non_veg", "expected_kcal_100g": [140, 230], "aliases": [["चिकन टिक्का", "hi"]]},
+  {"name": "Chicken 65", "cuisine": "South Indian", "region": null, "diet_class": "non_veg", "expected_kcal_100g": [200, 320], "aliases": [["Chicken Sixty Five", "en"]]},
+  {"name": "Samosa", "cuisine": "Snacks", "region": null, "diet_class": "veg", "expected_kcal_100g": [240, 360], "aliases": [["समोसा", "hi"], ["Aloo Samosa", "en"]]},
+  {"name": "Jeera Rice", "cuisine": "North Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [130, 200], "aliases": [["जीरा राइस", "hi"]]},
+  {"name": "Steamed Rice", "cuisine": "Staple", "region": null, "diet_class": "veg", "expected_kcal_100g": [110, 140], "aliases": [["Plain Rice", "en"], ["चावल", "hi"]]},
+  {"name": "Roti", "cuisine": "Staple", "region": null, "diet_class": "veg", "expected_kcal_100g": [230, 320], "aliases": [["Chapati", "en"], ["Phulka", "en"], ["रोटी", "hi"]]},
+  {"name": "Curd", "cuisine": "Staple", "region": null, "diet_class": "veg", "expected_kcal_100g": [50, 110], "aliases": [["Dahi", "en"], ["दही", "hi"]]}
+]

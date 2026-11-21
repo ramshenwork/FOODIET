@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ branch.name }} · {{ app_name }}{% endblock %}
+{% block body %}
+<p class="muted">{{ app_name }}</p>
+<h1>{{ branch.name }}</h1>
+{% if branch.address %}<p class="muted">{{ branch.address }}</p>{% endif %}
+{% set labels = {"verified": "✓ Verified", "declared": "Restaurant-declared", "estimated": "~ Estimated", "no_data": "No nutrition data"} %}
+{% if not sections %}<p>This menu has no published dishes yet.</p>{% endif %}
+{% for title, items in sections %}
+  <h2>{{ title }}</h2>
+  {% for item in items %}
+  <article class="dish">
+    <div class="row">
+      <span class="name">{% if item.diet_class %}<span class="diet {{ item.diet_class }}" role="img" aria-label="{{ item.diet_class | replace('_', '-') }}"></span>{% endif %}{{ item.display_name }}</span>
+      {% if item.price_inr is not none %}<span class="price">₹{{ "%.0f" | format(item.price_inr) }}</span>{% endif %}
+    </div>
+    {% set n = item.nutrition %}
+    {% if n.energy %}
+      <div class="energy">{{ n.energy.display }}</div>
+      <div class="macros">
+        <span>Protein {{ n.protein.display if n.protein else "not available" }}</span>
+        <span>Carbs {{ n.carbs.display if n.carbs else "not available" }}</span>
+        <span>Fat {{ n.fat.display if n.fat else "not available" }}</span>
+      </div>
+      {% if n.serving_label %}<div class="muted">{{ n.serving_label }}</div>{% endif %}
+    {% endif %}
+    <span class="pill {{ n.trust.label }}">{{ labels[n.trust.label] }}</span>
+    {% if n.trust.note %}<span class="muted"> · {{ n.trust.note }}</span>{% endif %}
+    <div class="allergen">{{ n.allergens.display }}</div>
+  </article>
+  {% endfor %}
+{% endfor %}
+<p class="legend">Restaurant-declared: calculated from this outlet's own recipe. Estimated: calculated from a typical recipe
+for this dish and region. Values are estimates, not medical advice.</p>
+<a class="cta" href="{{ subscribe_url }}">Find dishes that fit your goals with {{ app_name }}</a>
+{% endblock %}

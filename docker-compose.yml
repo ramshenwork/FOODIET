@@ -1,0 +1,16 @@
+# Local development only: a Postgres with the same extensions as Supabase.
+services:
+  db:
+    build:
+      context: ./docker
+      dockerfile: postgres.Dockerfile
+    environment:
+      POSTGRES_USER: foodiet
+      POSTGRES_PASSWORD: foodiet
+      POSTGRES_DB: foodiet
+    ports:
+      - "54330:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

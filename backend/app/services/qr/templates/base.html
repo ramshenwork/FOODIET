@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{% block title %}{{ app_name }}{% endblock %}</title>
+<style>
+  :root { --bg:#FAF7F0; --card:#fff; --ink:#101814; --muted:#5A6358; --line:#E6E2D8; --green:#0B6B4A; --green-fill:#12B76A;
+          --chip:#DFF7EA; --orange-fill:#FF7A1A; --orange-text:#A34808; --danger:#D92D20; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#071A13; --card:#0C2A1F; --ink:#EEF4F0; --muted:#A3B2A9; --line:rgba(255,255,255,.08); --green:#7BE0B0;
+            --chip:rgba(18,183,106,.16); --orange-text:#FFB473; --danger:#F97066; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.45 system-ui,-apple-system,"Segoe UI","Noto Sans",sans-serif;
+         font-variant-numeric: tabular-nums; }
+  main { max-width: 680px; margin: 0 auto; padding: 20px 16px 48px; }
+  h1 { font-size: 28px; line-height: 1.15; margin: 8px 0 4px; letter-spacing: -.02em; }
+  h2 { font-size: 18px; margin: 28px 0 10px; }
+  .muted { color: var(--muted); font-size: 14px; }
+  .dish { background: var(--card); border-radius: 20px; padding: 14px 16px; margin: 10px 0; border: 1px solid var(--line); }
+  .row { display:flex; justify-content:space-between; gap:12px; align-items:baseline; }
+  .name { font-weight: 600; }
+  .price { white-space: nowrap; }
+  .energy { color: var(--orange-text); font-weight: 700; font-size: 18px; margin-top: 6px; }
+  .macros { display:flex; flex-wrap:wrap; gap: 4px 14px; font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .pill { display:inline-block; font-size: 12px; font-weight: 600; border-radius: 999px; padding: 2px 9px; margin-top: 8px; }
+  .verified { background: var(--green-fill); color: #101814; }
+  .declared { border: 1px solid var(--green-fill); color: var(--green); }
+  .estimated { border: 1px solid var(--muted); color: var(--muted); }
+  .no_data { border: 1px dashed var(--line); color: var(--muted); }
+  .allergen { font-size: 13px; color: var(--danger); margin-top: 6px; }
+  .diet { display:inline-block; width:12px; height:12px; border:1.5px solid; border-radius:2px; position:relative; top:1px; margin-right:6px; }
+  .diet::after { content:""; position:absolute; inset:2px; border-radius:50%; background: currentColor; }
+  .veg { color:#12B76A; } .non_veg { color:#D92D20; } .egg { color:#B4500B; }
+  .cta { display:block; margin-top: 32px; background: var(--orange-fill); color:#101814; text-align:center; text-decoration:none;
+         font-weight:700; padding: 14px; border-radius: 16px; }
+  .legend { font-size: 13px; color: var(--muted); margin-top: 24px; }
+</style>
+</head>
+<body><main>{% block body %}{% endblock %}</main></body>
+</html>
