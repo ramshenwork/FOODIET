@@ -18,15 +18,16 @@ from app.services.nutrition import service as nutrition
 from app.services.trust import service as trust
 
 SEED = Path(__file__).resolve().parents[1] / "seed"
+DEMO_SEED = SEED / "demo"  # extra made-up dishes for the test server only; never loaded by default
 
 
-def _load(name: str):
-    return json.loads((SEED / name).read_text())
+def _load(name: str, dirs=(SEED,)):
+    return [row for d in dirs if (d / name).exists() for row in json.loads((d / name).read_text())]
 
 
-async def seed_ingredients(s: AsyncSession) -> dict[str, Ingredient]:
+async def seed_ingredients(s: AsyncSession, dirs=(SEED,)) -> dict[str, Ingredient]:
     out = {}
-    for row in _load("ingredients.json"):
+    for row in _load("ingredients.json", dirs):
         ing = await s.scalar(select(Ingredient).where(Ingredient.name == row["name"]))
         if ing is None:
             ing = Ingredient(name=row["name"])
@@ -45,9 +46,9 @@ async def seed_ingredients(s: AsyncSession) -> dict[str, Ingredient]:
     return out
 
 
-async def seed_dishes(s: AsyncSession) -> dict[str, CanonicalDish]:
+async def seed_dishes(s: AsyncSession, dirs=(SEED,)) -> dict[str, CanonicalDish]:
     out = {}
-    for row in _load("canonical_dishes.json"):
+    for row in _load("canonical_dishes.json", dirs):
         d = await s.scalar(select(CanonicalDish).where(CanonicalDish.name == row["name"]))
         if d is None:
             d = CanonicalDish(name=row["name"])
@@ -65,8 +66,8 @@ async def seed_dishes(s: AsyncSession) -> dict[str, CanonicalDish]:
     return out
 
 
-async def seed_references(s: AsyncSession, ings: dict, dishes: dict) -> dict[str, ReferenceRecipe]:
-    rows = _load("reference_recipes.json")
+async def seed_references(s: AsyncSession, ings: dict, dishes: dict, dirs=(SEED,)) -> dict[str, ReferenceRecipe]:
+    rows = _load("reference_recipes.json", dirs)
     out: dict[str, ReferenceRecipe] = {}
     pending = list(rows)
     while pending:  # sub-recipes first
@@ -123,12 +124,12 @@ async def report(s: AsyncSession, refs: dict, dishes: dict) -> list[str]:
     return lines
 
 
-async def main() -> None:
+async def main(dirs=(SEED,)) -> None:
     async with database.sessionmaker()() as s:
         async with events.job_run(s, "seed_reference"):
-            ings = await seed_ingredients(s)
-            dishes = await seed_dishes(s)
-            refs = await seed_references(s, ings, dishes)
+            ings = await seed_ingredients(s, dirs)
+            dishes = await seed_dishes(s, dirs)
+            refs = await seed_references(s, ings, dishes, dirs)
         await s.commit()
         print(f"Seeded {len(ings)} ingredients, {len(dishes)} canonical dishes, {len(refs)} reference recipes.")
         print("All nutrient profiles are placeholders with licence_status=pending.\n")

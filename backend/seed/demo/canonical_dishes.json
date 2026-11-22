@@ -1,0 +1,20 @@
+[
+  {"name": "Mutton Biryani", "cuisine": "Biryani", "region": null, "diet_class": "non_veg", "expected_kcal_100g": [160, 280], "aliases": [["Gosht Biryani", "en"], ["मटन बिरयानी", "hi"]]},
+  {"name": "Mutton Rogan Josh", "cuisine": "North Indian", "region": null, "diet_class": "non_veg", "expected_kcal_100g": [120, 230], "aliases": [["Rogan Josh", "en"]]},
+  {"name": "Fish Curry", "cuisine": "Coastal", "region": null, "diet_class": "non_veg", "expected_kcal_100g": [90, 190], "aliases": [["Meen Curry", "en"], ["Machli Curry", "en"]]},
+  {"name": "Prawn Masala", "cuisine": "Coastal", "region": null, "diet_class": "non_veg", "expected_kcal_100g": [90, 200], "aliases": [["Jhinga Masala", "en"]]},
+  {"name": "Rajma", "cuisine": "North Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [90, 170], "aliases": [["Rajma Masala", "en"], ["राजमा", "hi"]]},
+  {"name": "Moong Dal", "cuisine": "North Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [60, 140], "aliases": [["Yellow Dal", "en"], ["Dal Fry", "en"]]},
+  {"name": "Poha", "cuisine": "Western Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [130, 230], "aliases": [["Kanda Poha", "en"], ["पोहा", "hi"]]},
+  {"name": "Upma", "cuisine": "South Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [110, 210], "aliases": [["Rava Upma", "en"], ["Uppittu", "kn"]]},
+  {"name": "Egg Curry", "cuisine": "North Indian", "region": null, "diet_class": "egg", "expected_kcal_100g": [110, 210], "aliases": [["Anda Curry", "en"]]},
+  {"name": "Veg Hakka Noodles", "cuisine": "Indo-Chinese", "region": null, "diet_class": "veg", "expected_kcal_100g": [130, 230], "aliases": [["Veg Noodles", "en"], ["Chowmein", "en"]]},
+  {"name": "Chilli Paneer", "cuisine": "Indo-Chinese", "region": null, "diet_class": "veg", "expected_kcal_100g": [180, 300], "aliases": [["Paneer Chilli", "en"]]},
+  {"name": "Pav Bhaji", "cuisine": "Street Food", "region": null, "diet_class": "veg", "expected_kcal_100g": [140, 250], "aliases": [["Bhaji Pav", "en"]]},
+  {"name": "Coconut Chutney", "cuisine": "South Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [120, 300], "aliases": [["Nariyal Chutney", "en"]]},
+  {"name": "Egg Bhurji", "cuisine": "Street Food", "region": null, "diet_class": "egg", "expected_kcal_100g": [150, 260], "aliases": [["Anda Bhurji", "en"]]},
+  {"name": "Lemon Rice", "cuisine": "South Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [140, 230], "aliases": [["Chitranna", "kn"], ["Pulihora", "te"]]},
+  {"name": "Veg Pulao", "cuisine": "North Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [120, 210], "aliases": [["Vegetable Pulao", "en"]]},
+  {"name": "Mixed Veg Curry", "cuisine": "North Indian", "region": null, "diet_class": "veg", "expected_kcal_100g": [60, 150], "aliases": [["Mix Veg", "en"]]},
+  {"name": "Masala Omelette", "cuisine": "Breakfast", "region": null, "diet_class": "egg", "expected_kcal_100g": [150, 240], "aliases": [["Omelette", "en"]]}
+]
